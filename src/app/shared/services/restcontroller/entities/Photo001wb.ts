@@ -9,4 +9,5 @@ fieldname?: String;
 filename?: String;
 originalname?: String;
 content?: Buffer;
+flag?:boolean;
 }

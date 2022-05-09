@@ -17,8 +17,8 @@ import { Utils } from '../utils/utils';
 export class PopupComponent implements OnInit {
     @Input() title: string = 'Popup';
     @Input() addLabel: string = 'Add New';
-    @Input() acceptLabel: string = 'Ok';
-    @Input() cancelLabel: string = 'Close';
+    @Input() acceptLabel: string = 'Accept';
+    @Input() cancelLabel: string = 'Reject';
 
     @Input() showAccept: boolean = true;
     @Input() showAdd: boolean = false;

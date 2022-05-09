@@ -26,6 +26,8 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 import { UserRegistrationModule } from './user-registration/user-registration.module';
 import { JwtInterceptor } from './_helpers';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { ImagepopupComponent } from './shared/imagepopup/imagepopup.component';
+import { PhotoManager } from './shared/services/restcontroller/bizservice/photo.service';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 		ResetPasswordComponent,
 		AuditComponent,
 		UserRegistrationComponent,
-		IconRendererComponent
+		IconRendererComponent,
+		ImagepopupComponent
 	],
 	imports: [
 		CommonModule,
@@ -56,6 +59,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 	exports: [PopupComponent, NgbCollapseModule],
 	providers: [AuthManager, CalloutService, DataSharedService, UserManager, BaseService,
 		appSettingManager, PersonManager, UserManager,
+			PhotoManager,
 		{ provide: LocationStrategy, useClass: PathLocationStrategy },
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],

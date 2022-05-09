@@ -3,6 +3,11 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { Utils } from '../../utils/utils';
 import { environment } from 'src/environments/environment';
 import { AuthManager } from '../restcontroller/bizservice/auth-manager.service';
+import * as FileSaver from 'file-saver';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuditComponent } from '../../audit/audit.component';
+import { PopupComponent } from '../../popup/popup.component';
+import { ImagepopupComponent } from '../../imagepopup/imagepopup.component';
 
 @Component({
     selector: 'app-icon-renderer',
@@ -15,7 +20,7 @@ export class IconRendererComponent implements ICellRendererAngularComp {
     params: any;
     label: string = "";
     toggle: boolean = false;
-    public downloadUrl: string = `${environment.apiUrl}/filemanager/download/`;
+    public downloadUrl: string = `${environment.apiUrl}/photocontroller/show/`;
 
     hexToRgb: any;
     rgbToHex: any;
@@ -23,7 +28,7 @@ export class IconRendererComponent implements ICellRendererAngularComp {
     @HostBinding('style.--color_l2') colorthemes_2: any;
     @HostBinding('style.--color_l3') colorthemes_3: any;
     @HostBinding('style.--color_l4') colorthemes_4: any;
-    constructor(private authManager: AuthManager) {}
+    constructor(private authManager: AuthManager, private modalService: NgbModal) { }
 
 
     agInit(params: any): void {
@@ -39,9 +44,9 @@ export class IconRendererComponent implements ICellRendererAngularComp {
         });
         this.params = params;
         this.label = this.params.label || null;
-        this.downloadUrl = this.downloadUrl + this.params.data.originalfilename;
-    }
 
+        console.log("this.downloadUrl", this.params.data.filename)
+    }
     refresh(params?: any): boolean {
         return true;
     }
@@ -59,4 +64,11 @@ export class IconRendererComponent implements ICellRendererAngularComp {
         this.toggle = !this.toggle;
     }
 
+    onPopupButtonClick(params: any) {
+        const modalRef = this.modalService.open(ImagepopupComponent);
+        modalRef.componentInstance.title = "image";
+        modalRef.componentInstance.details = params.data;
+        modalRef.componentInstance.source = this.downloadUrl + this.params.data.filename;;
+    console.log("params",params)
+    }
 }

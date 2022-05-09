@@ -12,13 +12,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VideoManager } from 'src/app/shared/services/restcontroller/bizservice/video.service';
 import { AudioManager } from 'src/app/shared/services/restcontroller/bizservice/audio.service';
 
-
 @NgModule({
   declarations: [
     ContentmasterComponent,
     PhotoComponent,
     AudioComponent,
-    VideoComponent],
+    VideoComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
