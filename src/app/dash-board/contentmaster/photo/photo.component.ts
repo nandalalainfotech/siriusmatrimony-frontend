@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GridOptions } from 'ag-grid-community';
 import { deserialize } from 'serializer.ts/Serializer';
 import { AuditComponent } from 'src/app/shared/audit/audit.component';
+import { PopupComponent } from 'src/app/shared/popup/popup.component';
 import { IconRendererComponent } from 'src/app/shared/services/renderercomponent/icon-renderer-component';
 import { AuthManager } from 'src/app/shared/services/restcontroller/bizservice/auth-manager.service';
 import { PhotoManager } from 'src/app/shared/services/restcontroller/bizservice/photo.service';
@@ -42,6 +43,7 @@ export class PhotoComponent implements OnInit {
   ngOnInit() {
     this.createDataGrid001();
     this.photoManager.allsub().subscribe((response) => {
+      console.log("response",response)
       this.photo = deserialize<Photo001wb[]>(Photo001wb, response);
       if (this.photo.length > 0) {
         this.gridOptions?.api?.setRowData(this.photo);
@@ -117,13 +119,15 @@ export class PhotoComponent implements OnInit {
       },
       {
         headerName: 'content',
-        field: 'content',
+        cellRenderer: 'iconRenderer',
         width: 200,
         flex: 1,
-        sortable: true,
-        filter: true,
-        resizable: true,
-        suppressSizeToFit: true
+        suppressSizeToFit: true,
+        cellStyle: { textAlign: 'center' },
+        cellRendererParams: {
+          //  onClick: this.onPopupButtonClick.bind(this),
+          label: 'File'
+        },
       },
       // {
       // 	headerName: 'From Date',
@@ -221,7 +225,6 @@ export class PhotoComponent implements OnInit {
     modalRef.componentInstance.title = "subCategory";
     modalRef.componentInstance.details = params.data;
   }
-
   onFirstDataRendered(params: any) {
     params.api.sizeColumnsToFit();
   }
@@ -254,29 +257,29 @@ export class PhotoComponent implements OnInit {
       photo001wb.insertDatetime = this.insertDatetime;
       photo001wb.updatedUser = this.authManager.getcurrentUser.username;
       photo001wb.updatedDatetime = new Date();
-      this.photoManager.updatesub(photo001wb).subscribe(response => {
-        this.calloutService.showSuccess("Order Update Successfully");
-        let photos = deserialize<Photo001wb>(Photo001wb, response);
-        for (let analytic of this.photo) {
-          if (analytic.photoid == photos.photoid) {
-            analytic.content = photos.content;
-            analytic.contentid = photos.contentid;
-            analytic.fieldname = photos.fieldname;
-            analytic.originalname =photos.originalname
-            analytic.filename = photos.filename;
-            analytic.insertUser = this.insertUser;
-            analytic.insertDatetime = this.insertDatetime;
-            analytic.updatedUser = this.authManager.getcurrentUser.username;
-            analytic.updatedDatetime = new Date();
-          }
-        }
-        this.gridOptions.api.setRowData(this.photo);
-        this.gridOptions.api.refreshView();
-        this.gridOptions.api.deselectAll();
-        this.subCategoryForm.reset();
-        this.submitted = false;
-         this.subcatid = null;
-      })
+      // this.photoManager.updatesub(photo001wb).subscribe(response => {
+      //   this.calloutService.showSuccess("Order Update Successfully");
+      //   let photos = deserialize<Photo001wb>(Photo001wb, response);
+      //   for (let analytic of this.photo) {
+      //     if (analytic.photoid == photos.photoid) {
+      //       analytic.content = photos.content;
+      //       analytic.contentid = photos.contentid;
+      //       analytic.fieldname = photos.fieldname;
+      //       analytic.originalname =photos.originalname
+      //       analytic.filename = photos.filename;
+      //       analytic.insertUser = this.insertUser;
+      //       analytic.insertDatetime = this.insertDatetime;
+      //       analytic.updatedUser = this.authManager.getcurrentUser.username;
+      //       analytic.updatedDatetime = new Date();
+      //     }
+      //   }
+      //   this.gridOptions.api.setRowData(this.photo);
+      //   this.gridOptions.api.refreshView();
+      //   this.gridOptions.api.deselectAll();
+      //   this.subCategoryForm.reset();
+      //   this.submitted = false;
+      //    this.subcatid = null;
+      // })
     }
   }
   onReset() {

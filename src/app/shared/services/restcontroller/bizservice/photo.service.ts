@@ -12,17 +12,20 @@ export class PhotoManager extends BaseService {
 
     allsub() {
         return this.getCallService(`${this.photoUrl}` + "/list");
+
     }
 
-    // savesub(subcategory001mb: Subcategory001mb) {
-    //     console.log("subcategory001mb",subcategory001mb);
-    //     return this.postCallService(`${this.subcatUrl}` + "/create", {}, subcategory001mb);
-    // }
-
-    updatesub(photo001wb: Photo001wb) {
-        return this.putCallService(`${this.photoUrl}` + "/update", {}, photo001wb);
+    savesub(photo001wb: Photo001wb) {
+        
+        return this.postCallService(`${this.photoUrl}` + "/create", {}, photo001wb);
     }
 
+    updatesub(photo001wb: Photo001wb,id: any) {
+        return this.putCallService(`${this.photoUrl}` + "/update/"+ id, {}, photo001wb);
+    }
+    updatesubss(photo001wb: Photo001wb,id: any) {
+        return this.putCallService(`${this.photoUrl}` + "/update/"+ id, {}, photo001wb);
+    }
     deletesub(id: any) {
         let data: any = {};
         data['id'] = id;

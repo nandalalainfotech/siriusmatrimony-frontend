@@ -16,6 +16,6 @@
 </a>
 
 
-<a [ngStyle]="{'color':colorthemes_1}" *ngIf="this.label == 'File' ? true : false" href="{{downloadUrl}}" target="_blank">
-    <i class="fa fa-download"></i>
+<a [ngStyle]="{'color':colorthemes_1}" *ngIf="this.label == 'File' ? true : false" (click)="onPopupButtonClick(params)"   target="_blank">
+    <i class="fa fa-eye"></i>
 </a>
