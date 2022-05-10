@@ -5,6 +5,7 @@ import { GridOptions } from 'ag-grid-community';
 import { deserialize } from 'serializer.ts/Serializer';
 import { AuditComponent } from 'src/app/shared/audit/audit.component';
 import { IconRendererComponent } from 'src/app/shared/services/renderercomponent/icon-renderer-component';
+import { IconVideoRendererComponent } from 'src/app/shared/services/renderercomponent/iconvideo-renderer-component';
 import { AuthManager } from 'src/app/shared/services/restcontroller/bizservice/auth-manager.service';
 import { VideoManager } from 'src/app/shared/services/restcontroller/bizservice/video.service';
 import { Video001wb } from 'src/app/shared/services/restcontroller/entities/Video001wb';
@@ -37,7 +38,7 @@ export class VideoComponent implements OnInit {
     private authManager: AuthManager,
     private modalService: NgbModal) {
     this.frameworkComponents = {
-      iconRenderer: IconRendererComponent
+      iconRenderer: IconVideoRendererComponent
     }
   }
   ngOnInit() {
@@ -118,13 +119,15 @@ export class VideoComponent implements OnInit {
       },
       {
         headerName: 'content',
-        field: 'content',
+        cellRenderer: 'iconRenderer',
         width: 200,
         flex: 1,
-        sortable: true,
-        filter: true,
-        resizable: true,
-        suppressSizeToFit: true
+        suppressSizeToFit: true,
+        cellStyle: { textAlign: 'center' },
+        cellRendererParams: {
+          // onClick: this.onEditButtonClick.bind(this),
+          label: 'File'
+        }
       },
       // {
       // 	headerName: 'From Date',
@@ -255,29 +258,29 @@ export class VideoComponent implements OnInit {
       video001wb.insertDatetime = this.insertDatetime;
       video001wb.updatedUser = this.authManager.getcurrentUser.username;
       video001wb.updatedDatetime = new Date();
-      this.videoManager.updatesub(video001wb).subscribe(response => {
-        this.calloutService.showSuccess("Order Update Successfully");
-        let photos = deserialize<Video001wb>(Video001wb, response);
-        for (let analytic of this.photo) {
-          if (analytic.videoid == photos.videoid) {
-            analytic.content = photos.content;
-            analytic.contentid = photos.contentid;
-            analytic.fieldname = photos.fieldname;
-            analytic.originalname =photos.originalname
-            analytic.filename = photos.filename;
-            analytic.insertUser = this.insertUser;
-            analytic.insertDatetime = this.insertDatetime;
-            analytic.updatedUser = this.authManager.getcurrentUser.username;
-            analytic.updatedDatetime = new Date();
-          }
-        }
+      // this.videoManager.updatesub(video001wb).subscribe(response => {
+      //   this.calloutService.showSuccess("Order Update Successfully");
+      //   let photos = deserialize<Video001wb>(Video001wb, response);
+      //   for (let analytic of this.photo) {
+      //     if (analytic.videoid == photos.videoid) {
+      //       analytic.content = photos.content;
+      //       analytic.contentid = photos.contentid;
+      //       analytic.fieldname = photos.fieldname;
+      //       analytic.originalname =photos.originalname
+      //       analytic.filename = photos.filename;
+      //       analytic.insertUser = this.insertUser;
+      //       analytic.insertDatetime = this.insertDatetime;
+      //       analytic.updatedUser = this.authManager.getcurrentUser.username;
+      //       analytic.updatedDatetime = new Date();
+      //     }
+      //   }
         this.gridOptions.api.setRowData(this.photo);
         this.gridOptions.api.refreshView();
         this.gridOptions.api.deselectAll();
         this.subCategoryForm.reset();
         this.submitted = false;
          this.subcatid = null;
-      })
+      // })
     }
   }
   onReset() {

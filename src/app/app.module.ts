@@ -28,6 +28,12 @@ import { JwtInterceptor } from './_helpers';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { ImagepopupComponent } from './shared/imagepopup/imagepopup.component';
 import { PhotoManager } from './shared/services/restcontroller/bizservice/photo.service';
+import { AudiopopupComponent } from './shared/audiopopup/audiopopup.component';
+import { VideopopupComponent } from './shared/videopopup/videopopup.component';
+import { IconAudioRendererComponent } from './shared/services/renderercomponent/iconaudio-renderer-component';
+import { AudioManager } from './shared/services/restcontroller/bizservice/audio.service';
+import { VideoManager } from './shared/services/restcontroller/bizservice/video.service';
+import { IconVideoRendererComponent } from './shared/services/renderercomponent/iconvideo-renderer-component';
 
 
 @NgModule({
@@ -40,7 +46,11 @@ import { PhotoManager } from './shared/services/restcontroller/bizservice/photo.
 		AuditComponent,
 		UserRegistrationComponent,
 		IconRendererComponent,
-		ImagepopupComponent
+		IconAudioRendererComponent,
+		IconVideoRendererComponent,
+		ImagepopupComponent,
+		AudiopopupComponent,
+		VideopopupComponent
 	],
 	imports: [
 		CommonModule,
@@ -59,7 +69,7 @@ import { PhotoManager } from './shared/services/restcontroller/bizservice/photo.
 	exports: [PopupComponent, NgbCollapseModule],
 	providers: [AuthManager, CalloutService, DataSharedService, UserManager, BaseService,
 		appSettingManager, PersonManager, UserManager,
-			PhotoManager,
+		PhotoManager, AudioManager, VideoManager,
 		{ provide: LocationStrategy, useClass: PathLocationStrategy },
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],

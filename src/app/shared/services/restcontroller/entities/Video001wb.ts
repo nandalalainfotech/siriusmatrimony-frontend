@@ -9,4 +9,6 @@ export class Video001wb extends BaseEntity {
     filename?: String;
     originalname?: String;
     content?: Buffer;
+    flag?:boolean;
+    fileid?:string;
 }

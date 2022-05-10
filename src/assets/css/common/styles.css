@@ -1532,6 +1532,7 @@ body::-webkit-validation-bubble-arrow:increment {
     padding: 1px 0 0 0;
     background-color: var(--color_l2);
     box-sizing: border-box;
+    margin-right: -1px;
 }
 
 .title {

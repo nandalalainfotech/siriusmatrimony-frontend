@@ -8,19 +8,20 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuditComponent } from '../../audit/audit.component';
 import { PopupComponent } from '../../popup/popup.component';
 import { ImagepopupComponent } from '../../imagepopup/imagepopup.component';
+import { AudiopopupComponent } from '../../audiopopup/audiopopup.component';
 
 @Component({
-    selector: 'app-icon-renderer',
-    templateUrl: './icon-renderer-component.html',
-    styleUrls: ['./icon-renderer-component.css'],
+    selector: 'app-iconaudio-renderer',
+    templateUrl: './iconaudio-renderer-component.html',
+    styleUrls: ['./iconaudio-renderer-component.css'],
 
 })
-export class IconRendererComponent implements ICellRendererAngularComp {
+export class IconAudioRendererComponent implements ICellRendererAngularComp {
 
     params: any;
     label: string = "";
     toggle: boolean = false;
-    public downloadUrl: string = `${environment.apiUrl}/photocontroller/show/`;
+    public downloadUrl: string = `${environment.apiUrl}/audiocontroller/show/`;
 
     hexToRgb: any;
     rgbToHex: any;
@@ -44,8 +45,6 @@ export class IconRendererComponent implements ICellRendererAngularComp {
         });
         this.params = params;
         this.label = this.params.label || null;
-
-        console.log("this.downloadUrl", this.params.data.filename)
     }
     refresh(params?: any): boolean {
         return true;
@@ -65,10 +64,11 @@ export class IconRendererComponent implements ICellRendererAngularComp {
     }
 
     onPopupButtonClick(params: any) {
-        const modalRef = this.modalService.open(ImagepopupComponent,{backdrop : 'static'});
-        modalRef.componentInstance.title = "image";
+        const modalRef = this.modalService.open(AudiopopupComponent,{backdrop : 'static'});
+        modalRef.componentInstance.title = "Audio";
         modalRef.componentInstance.details = params.data;
-        modalRef.componentInstance.source = this.downloadUrl + this.params.data.filename;;
-    console.log("params",params)
-    }
+        modalRef.componentInstance.sources = this.downloadUrl + this.params.data.filename;
+   
+   console.log("modalRef.componentInstance.sources",modalRef.componentInstance.sources) 
+}
 }

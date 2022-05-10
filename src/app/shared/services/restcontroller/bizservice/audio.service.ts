@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { BaseService } from "../../services/base.service";
+import { Audio001wb } from "../entities/Audio001wb";
 import { Photo001wb } from "../entities/Photo001wb";
 
 
@@ -18,9 +19,11 @@ export class AudioManager extends BaseService {
     //     console.log("subcategory001mb",subcategory001mb);
     //     return this.postCallService(`${this.subcatUrl}` + "/create", {}, subcategory001mb);
     // }
-
-    updatesub(photo001wb: Photo001wb) {
-        return this.putCallService(`${this.audioUrl}` + "/update", {}, photo001wb);
+    updatesubss(audio001wb: Audio001wb,id: any) {
+        return this.putCallService(`${this.audioUrl}` + "/update/"+ id, {}, audio001wb);
+    }
+    updatesub(audio001wb: Audio001wb,id: any) {
+        return this.putCallService(`${this.audioUrl}` + "/update/" + id, {}, audio001wb);
     }
 
     deletesub(id: any) {

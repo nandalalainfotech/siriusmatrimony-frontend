@@ -4,13 +4,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GridOptions } from 'ag-grid-community';
 import { deserialize } from 'serializer.ts/Serializer';
 import { AuditComponent } from 'src/app/shared/audit/audit.component';
-import { PopupComponent } from 'src/app/shared/popup/popup.component';
 import { IconRendererComponent } from 'src/app/shared/services/renderercomponent/icon-renderer-component';
 import { AuthManager } from 'src/app/shared/services/restcontroller/bizservice/auth-manager.service';
 import { PhotoManager } from 'src/app/shared/services/restcontroller/bizservice/photo.service';
+import { Contentmaster001mb } from 'src/app/shared/services/restcontroller/entities/Contentmaster001mb';
 import { Photo001wb } from 'src/app/shared/services/restcontroller/entities/Photo001wb';
 import { CalloutService } from 'src/app/shared/services/services/callout.service';
-
+import { DomSanitizer } from '@angular/platform-browser';
+import { saveAs } from 'file-saver'
 @Component({
   selector: 'app-photo',
   templateUrl: './photo.component.html',
@@ -18,32 +19,52 @@ import { CalloutService } from 'src/app/shared/services/services/callout.service
 })
 export class PhotoComponent implements OnInit {
   frameworkComponents: any;
-  contentid: string = "";
-  fieldname:string="";
-  filename:string="";
-  originalname:string="";
+  contentid?: Contentmaster001mb;
+  fieldname: string = "";
+  filename: string = "";
+  originalname: string = "";
   content?: Buffer;
-  photoid:number|any;
+  photoid: number | any;
   public gridOptions: GridOptions | any;
   subCategoryForm: FormGroup | any;
   submitted = false;
-  subcatid:number|any; 
+  subcatid: number | any;
   photo: Photo001wb[] = [];
   insertUser: any;
   insertDatetime: any;
+  image:any;
+  arrayBuffer:any;
+  buffer:any;
+  imageurl:any;
   constructor(private photoManager: PhotoManager,
     private formBuilder: FormBuilder,
     private calloutService: CalloutService,
     private authManager: AuthManager,
-    private modalService: NgbModal) {
+    private modalService: NgbModal,  private sanitizer: DomSanitizer) {
     this.frameworkComponents = {
       iconRenderer: IconRendererComponent
     }
+
   }
   ngOnInit() {
     this.createDataGrid001();
     this.photoManager.allsub().subscribe((response) => {
-      console.log("response",response)
+      console.log("response", response)
+      // var buffer = new ArrayBuffer(32);
+
+      // var bufffers=new Blob([buffer]);
+      // console.log("bufffers", bufffers)
+      // let objectURL = 'data:image/png;base64,' + response.content;
+      // this.image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      //  var blob = new Blob([response.text()], {type: "image/png"});
+      // console.log(blob);
+      // console.log(window.btoa(blob.toString()));
+      // var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));
+      // let TYPED_ARRAY = new Uint8Array(response.content);
+      // const STRING_CHAR = TYPED_ARRAY.reduce((data, byte)=> {
+      //   return data + String.fromCharCode(byte);
+      //   }, '');
+      //   let base64String = btoa(STRING_CHAR);
       this.photo = deserialize<Photo001wb[]>(Photo001wb, response);
       if (this.photo.length > 0) {
         this.gridOptions?.api?.setRowData(this.photo);
@@ -51,8 +72,63 @@ export class PhotoComponent implements OnInit {
         this.gridOptions?.api?.setRowData([]);
       }
     })
+        // var binary = '';
+        // var bytes = new Uint8Array( this.buffer );
+        // var len = bytes.byteLength;
+        // for (var i = 0; i < len; i++) {
+        //     binary += String.fromCharCode( bytes[ i ] );
+        // }
+       
+        // return window.btoa( binary );
+  
+//   function base64ToArrayBuffer(base64) {
+    //     var binaryString = window.atob(base64);
+    //     var binaryLen = binaryString.length;
+    //     var bytes = new Uint8Array(binaryLen);
+    //     for (var i = 0; i < binaryLen; i++) {
+    //        var ascii = binaryString.charCodeAt(i);
+    //        bytes[i] = ascii;
+    //     }
+    //     return bytes;
+    //  }
+      // var buffer = Buffer.from('response.content');
+      // console.log("buffer", buffer)
+      // var string64 = buffer.toString('base64');
+      // console.log("string64", string64)
+      // var string64 = response.content.data.toString('base64');
+      // console.log("string64",string64)
+      // const reader = new FileReader();
+      // reader.onload = (e) => this.image = e.target.result;
+      // reader.readAsDataURL(new Blob([data]));
+      // let hh = new Uint8Array(response.content);
+      // const STRING_CHAR =hh.reduce((data, byte)=> {
+      //   return data + String.fromCharCode(byte);
+      //   }, '');
+      //   let base64String = btoa(STRING_CHAR);
+      //   this.imageurl = this.domSanitizer.bypassSecurityTrustUrl(‘data:image/jpg;base64, ‘ + base64String);
+     
   }
-   get f() { return this.subCategoryForm.controls; }
+  get f() { return this.subCategoryForm.controls; }
+  
+    //    base64ToArrayBuffer(base64:any) {
+    //     var binaryString = window.atob(base64);
+    //     var binaryLen = binaryString.length;
+    //     var bytes = new Uint8Array(binaryLen);
+    //     for (var i = 0; i < binaryLen; i++) {
+    //        var ascii = binaryString.charCodeAt(i);
+    //        bytes[i] = ascii;
+    //     }
+    //     return bytes;
+    //  }
+  //    arrayBufferToBase64 = function( buffer: Iterable<number> | undefined ) {
+  //     var binary = '';
+  //     var bytes = new Uint8Array( buffer );
+  //     var len = bytes.byteLength;
+  //     for (var i = 0; i < len; i++) {
+  //         binary += String.fromCharCode( bytes[ i ] );
+  //     }
+  //     return window.btoa( binary );
+  // }
   createDataGrid001(): void {
     this.gridOptions = {
       paginationPageSize: 10,
@@ -64,18 +140,18 @@ export class PhotoComponent implements OnInit {
     this.gridOptions.animateRows = true;
     this.gridOptions.columnDefs = [
       {
-      	headerName: '#Id',
-      	field: 'photoid',
-      	width: 200,
-      	flex: 1,
-      	sortable: true,
-      	filter: true,
-      	resizable: true,
-      	headerCheckboxSelection: true,
-      	headerCheckboxSelectionFilteredOnly: true,
-      	checkboxSelection: true,
-      	suppressSizeToFit: true,
-        hide: "true" 
+        headerName: '#Id',
+        field: 'photoid',
+        width: 200,
+        flex: 1,
+        sortable: true,
+        filter: true,
+        resizable: true,
+        headerCheckboxSelection: true,
+        headerCheckboxSelectionFilteredOnly: true,
+        checkboxSelection: true,
+        suppressSizeToFit: true,
+        hide: "true"
       },
       {
         headerName: 'contentid',
@@ -122,12 +198,15 @@ export class PhotoComponent implements OnInit {
         cellRenderer: 'iconRenderer',
         width: 200,
         flex: 1,
-        suppressSizeToFit: true,
         cellStyle: { textAlign: 'center' },
         cellRendererParams: {
-          //  onClick: this.onPopupButtonClick.bind(this),
+          onClick: this.onphotoButtonClick.bind(this),
           label: 'File'
         },
+        sortable: true,
+        filter: true,
+        resizable: true,
+        suppressSizeToFit: true
       },
       // {
       // 	headerName: 'From Date',
@@ -154,19 +233,7 @@ export class PhotoComponent implements OnInit {
       // 	valueGetter: (params: any) => {
       //               return params.data.toDate ? this.datePipe.transform(params.data.toDate, 'MM/dd/yyyy') : '';
       //           }
-      // },
-      {
-        headerName: 'Edit',
-        cellRenderer: 'iconRenderer',
-        width: 200,
-        flex: 1,
-        suppressSizeToFit: true,
-        cellStyle: { textAlign: 'center' },
-        cellRendererParams: {
-          onClick: this.onEditButtonClick.bind(this),
-          label: 'Edit'
-        },
-      },
+      // }
       {
         headerName: 'Delete',
         cellRenderer: 'iconRenderer',
@@ -193,6 +260,9 @@ export class PhotoComponent implements OnInit {
       },
     ];
   }
+  onphotoButtonClick(params: any) {
+
+  }
   onEditButtonClick(params: any) {
     this.contentid = params.data.contentid;
     this.fieldname = params.data.fieldname;
@@ -202,8 +272,8 @@ export class PhotoComponent implements OnInit {
     this.insertUser = params.data.insertUser;
     this.insertDatetime = params.data.insertDatetime;
     this.subCategoryForm.patchValue({
-      'subcatname': params.data.subcatname, 
-      'catcode':params.data.catcode     
+      'subcatname': params.data.subcatname,
+      'catcode': params.data.catcode
     });
   }
   onDeleteButtonClick(params: any) {
@@ -225,6 +295,7 @@ export class PhotoComponent implements OnInit {
     modalRef.componentInstance.title = "subCategory";
     modalRef.componentInstance.details = params.data;
   }
+
   onFirstDataRendered(params: any) {
     params.api.sizeColumnsToFit();
   }
@@ -237,7 +308,7 @@ export class PhotoComponent implements OnInit {
   //   });
   // }
   onOrderClick(event: any, subCategoryForm: any) {
-     console.log("testting---1")
+    console.log("testting---1")
     // this.markFormGroupTouched(this.subCategoryForm);
     this.submitted = true;
     if (this.subCategoryForm.invalid) {
@@ -265,7 +336,7 @@ export class PhotoComponent implements OnInit {
       //       analytic.content = photos.content;
       //       analytic.contentid = photos.contentid;
       //       analytic.fieldname = photos.fieldname;
-      //       analytic.originalname =photos.originalname
+      //       analytic.originalname = photos.originalname
       //       analytic.filename = photos.filename;
       //       analytic.insertUser = this.insertUser;
       //       analytic.insertDatetime = this.insertDatetime;
@@ -273,12 +344,12 @@ export class PhotoComponent implements OnInit {
       //       analytic.updatedDatetime = new Date();
       //     }
       //   }
-      //   this.gridOptions.api.setRowData(this.photo);
-      //   this.gridOptions.api.refreshView();
-      //   this.gridOptions.api.deselectAll();
-      //   this.subCategoryForm.reset();
-      //   this.submitted = false;
-      //    this.subcatid = null;
+        this.gridOptions.api.setRowData(this.photo);
+        this.gridOptions.api.refreshView();
+        this.gridOptions.api.deselectAll();
+        this.subCategoryForm.reset();
+        this.submitted = false;
+        this.subcatid = null;
       // })
     }
   }
