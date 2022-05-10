@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { BaseService } from "../../services/base.service";
 import { Photo001wb } from "../entities/Photo001wb";
+import { Video001wb } from "../entities/Video001wb";
 
 
 @Injectable()
@@ -18,9 +19,11 @@ export class VideoManager extends BaseService {
     //     console.log("subcategory001mb",subcategory001mb);
     //     return this.postCallService(`${this.subcatUrl}` + "/create", {}, subcategory001mb);
     // }
-
-    updatesub(photo001wb: Photo001wb) {
-        return this.putCallService(`${this.videoUrl}` + "/update", {}, photo001wb);
+    updatesubss(video001wb: Video001wb,id: any) {
+        return this.putCallService(`${this.videoUrl}` + "/update/"+ id, {}, video001wb);
+    }
+    updatesub(video001wb: Video001wb,id: any) {
+        return this.putCallService(`${this.videoUrl}` + "/update/" + id, {}, video001wb);
     }
 
     deletesub(id: any) {

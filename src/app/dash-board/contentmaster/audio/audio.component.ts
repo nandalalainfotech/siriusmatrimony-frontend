@@ -5,6 +5,7 @@ import { GridOptions } from 'ag-grid-community';
 import { deserialize } from 'serializer.ts/Serializer';
 import { AuditComponent } from 'src/app/shared/audit/audit.component';
 import { IconRendererComponent } from 'src/app/shared/services/renderercomponent/icon-renderer-component';
+import { IconAudioRendererComponent } from 'src/app/shared/services/renderercomponent/iconaudio-renderer-component';
 import { AudioManager } from 'src/app/shared/services/restcontroller/bizservice/audio.service';
 import { AuthManager } from 'src/app/shared/services/restcontroller/bizservice/auth-manager.service';
 import { Audio001wb } from 'src/app/shared/services/restcontroller/entities/Audio001wb';
@@ -38,7 +39,7 @@ export class AudioComponent implements OnInit {
     private authManager: AuthManager,
     private modalService: NgbModal) {
     this.frameworkComponents = {
-      iconRenderer: IconRendererComponent
+      iconRenderer: IconAudioRendererComponent
     }
   }
   ngOnInit() {
@@ -125,7 +126,7 @@ export class AudioComponent implements OnInit {
         flex: 1,
         cellStyle: { textAlign: 'center' },
         cellRendererParams: {
-          onClick: this.onaudioButtonClick.bind(this),
+          // onClick: this.onaudioButtonClick.bind(this),
           label: 'File'
         },
         sortable: true,
@@ -265,7 +266,7 @@ export class AudioComponent implements OnInit {
       audio001wb.insertDatetime = this.insertDatetime;
       audio001wb.updatedUser = this.authManager.getcurrentUser.username;
       audio001wb.updatedDatetime = new Date();
-      this.audioManager.updatesub(audio001wb).subscribe(response => {
+      this.audioManager.updatesub(audio001wb,this.audioid).subscribe(response => {
         this.calloutService.showSuccess("Order Update Successfully");
         let audio = deserialize<Audio001wb>(Audio001wb, response);
         for (let analytic of this.audio) {

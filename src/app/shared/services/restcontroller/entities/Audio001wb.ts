@@ -9,4 +9,6 @@ export class Audio001wb extends BaseEntity {
     filename?: String;
     originalname?: String;
     content?: Buffer;
+    flag?:Boolean;
+    fileid?:string;
 }
