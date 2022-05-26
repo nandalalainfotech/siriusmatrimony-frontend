@@ -35,6 +35,10 @@ const routes: Routes = [
       {
         path: 'app-side-menu',
         loadChildren: () => import("./side-menu/side-menu.module").then(m => m.SideMenuModule)
+      },
+      {
+        path: 'app-setting',
+        loadChildren: () => import("./setting/setting.module").then(m => m.SettingModule)
       }
     ]
   }

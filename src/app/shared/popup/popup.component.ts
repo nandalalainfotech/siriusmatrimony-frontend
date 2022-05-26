@@ -11,7 +11,7 @@ import { AuthManager } from '../services/restcontroller/bizservice/auth-manager.
 import { Utils } from '../utils/utils';
 
 @Component({
-    selector: 'nandalala-popup',
+    selector: 'app-popup',
     templateUrl: 'popup.component.html',
 })
 export class PopupComponent implements OnInit {

@@ -6,12 +6,12 @@ import { BaseService } from "../../services/base.service";
 
 export class PersonManager extends BaseService {
 
-    private personUrl: string = `${environment.apiUrl}/person`
+    private personUrl: string = `${environment.apiUrl}/personcontroller`
 
 
     allperson() {
 
-        return this.getCallService(`${this.personUrl}` + "/findAll");
+        return this.getCallService(`${this.personUrl}` + "/LIST");
     }
 
     allpersonRegister() {

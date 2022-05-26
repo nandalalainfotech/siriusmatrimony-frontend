@@ -4,7 +4,7 @@ import { Person001mb } from "./Person001mb";
 
 export class User001wb extends BaseEntity {
 
-    personid?: Person001mb;
+    personid?: string;
     employeeid?: string;
     bankname?: string;
     accountnumber?: string;

@@ -2,7 +2,7 @@ import { Person001mb } from "./Person001mb";
 import { Role001wb } from "./Role001wb";
 
 export class Login001mb extends Person001mb   {
-    personid?: Person001mb;
+    personid?: string;
     domain?: string;
     username?: string;
     password?: string;

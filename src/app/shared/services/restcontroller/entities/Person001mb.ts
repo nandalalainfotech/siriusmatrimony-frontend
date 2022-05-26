@@ -4,6 +4,7 @@ import { City001mb } from "./City001mb";
 import { Companydetails001mb } from "./Companydetails001mb";
 import { Country001mb } from "./Country001mb";
 import { Language001mb } from "./Language001mb";
+import { Login001mb } from "./Login001mb";
 import { Regionaldetails001mb } from "./Regionaldetails001mb";
 import { Religion001mb } from "./Religion001mb";
 import { Role001wb } from "./Role001wb";
@@ -13,8 +14,11 @@ import { Subcategory001mb } from "./Subcategory001mb";
 import { Subscribercontentauth001wb } from "./Subscribercontentauth001wb";
 import { subscriberpersonalinfo001wb } from "./Subscriberpersonalinfo001wb";
 import { Subscriberprofessionalinfo002wb } from "./Subscriberprofessionalinfo002wb";
+import { User001wb } from "./users001wb";
 
 export class Person001mb extends BaseEntity {
+    usersid?:User001wb|any;
+    loginid?:Login001mb|any;
     regionalid?: Regionaldetails001mb;
     companycode?: Companydetails001mb;
     roleid?: Role001wb;
