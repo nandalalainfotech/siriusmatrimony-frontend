@@ -68,7 +68,5 @@ export class IconAudioRendererComponent implements ICellRendererAngularComp {
         modalRef.componentInstance.title = "Audio";
         modalRef.componentInstance.details = params.data;
         modalRef.componentInstance.sources = this.downloadUrl + this.params.data.filename;
-   
-   console.log("modalRef.componentInstance.sources",modalRef.componentInstance.sources) 
 }
 }

@@ -38,6 +38,7 @@ export class HeaderComponent implements OnInit {
     colorthemes: any;
     login001mb: Login001mb = new Login001mb();
     color: any;
+    name:any;
     clr = 'black';
     sideNavMode: string | undefined;
     public gridOptions: GridOptions | any;
@@ -53,6 +54,7 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         let control = this.authManger.getcurrentUser;
+        this.name=control.username;
         this.color = control.theme;
         this.colorthemes = this.color;
         this.dataSharedService.currentMenuObject.subscribe((object: any) => {
