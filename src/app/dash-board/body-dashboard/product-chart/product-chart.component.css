@@ -3,7 +3,7 @@
      justify-content: space-between;
      margin-left: 30px;
  }
- 
+
  .card {
      background-color: #fff;
      height: 150px;
@@ -20,56 +20,56 @@
      /* margin-right: -12px;
      margin-left: -12px; */
  }
- 
+
  .d-flex {
      text-align: center;
      margin-top: 0px;
      /* padding-left: 14px; */
  }
- 
+
  .card1 {
      width: 100%;
      /* margin-left: 9%; */
  }
- 
+
  .col-4 {
      flex: 0 0 auto;
      padding: 0.5rem;
      /* width: 85.3333%; */
      width: 94.3333%;
  }
- 
+
  h5 {
      font-family: verdana;
      font-size: 14px;
  }
- 
+
  h2 .span {
      font-size: 15px;
      font-weight: bold;
      font-family: verdana;
  }
- 
+
  .l-bg-cherry {
      background: linear-gradient(to right, #cfb0f1, #3cbfe7) !important;
      color: #fff;
  }
- 
+
  .l-bg-blue-dark {
      background: linear-gradient(to right, #cfb0f1, #3cbfe7) !important;
      color: #fff;
  }
- 
+
  .l-bg-green-dark {
      background: linear-gradient(to right, #cfb0f1, #3cbfe7) !important;
      color: #fff;
  }
- 
+
  .l-bg-orange-dark {
      background: linear-gradient(to right, #cfb0f1, #3cbfe7) !important;
      color: #fff;
  }
- 
+
  .card .card-statistic-3 .card-icon {
      text-align: center;
      line-height: 10px;
@@ -81,4 +81,16 @@
      /* opacity: 0.1; */
      font-size: 3em;
      margin-top: 0px;
+ }
+
+
+ ::ng-deep.p-progressbar-determinate .p-progressbar-label {
+    font-weight: 700;
+    height: 100%;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    color: darkblue;
+    font-size: 11px;
+    margin-top: -3px;
  }

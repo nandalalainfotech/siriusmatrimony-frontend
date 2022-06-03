@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { single } from './data';
+import { single } from '../piegrid-chart/data';
+// import { single } from '../salepie-chart/data';
 
 @Component({
   selector: 'app-piegrid-chart',

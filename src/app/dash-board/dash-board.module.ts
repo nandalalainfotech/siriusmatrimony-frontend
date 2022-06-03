@@ -12,9 +12,10 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { GojsAngularModule } from 'gojs-angular';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { ChartsModule } from 'ng2-charts';
-import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+// import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { SubscriptionmasterManager } from '../shared/services/restcontroller/bizservice/subscriptionmaster.service';
 import { UserManager } from '../shared/services/restcontroller/bizservice/user.service';
 import { DataSharedService } from '../shared/services/services/datashared.service';
 import { AdvancepieChartComponent } from './body-dashboard/advancepie-chart/advancepie-chart.component';
@@ -61,8 +62,8 @@ import { DashBoardComponent } from './dash-board.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
-
-
+import { ProgressBarModule } from 'primeng/progressbar';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 // import {NgxCumulioComponent} from 'ngx-cumulio';
 
 
@@ -147,6 +148,7 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
         // MatDividerModule,
         // MatToolbarModule,
         PerfectScrollbarModule,
+        ProgressBarModule,
         ProgressbarModule.forRoot(),
         RoundProgressModule,
         TranslateModule.forRoot(),
@@ -174,7 +176,7 @@ NgxChartsModule,
         ColorPickerModule,
         DashboardRoutingModule
     ],
-    providers: [DataSharedService, UserManager],
+    providers: [DataSharedService, UserManager,SubscriptionmasterManager],
     exports: [NgbCollapseModule],
 })
 export class DashboardModule { }
