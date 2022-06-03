@@ -5,7 +5,6 @@ import { Person001mb } from "./Person001mb";
 import { Subscriptionmaster001mb } from "./Subscriptionmaster001mb";
 
 export class Subscriberdetails001wb extends BaseEntity {
-subdid?:string
 personid?: Person001mb;
 subpid?: Subscriptionmaster001mb;
 payid?: Payment001mb;
