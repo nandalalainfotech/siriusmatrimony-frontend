@@ -12,13 +12,15 @@ import { State001mb } from "./State001mb";
 import { Subcatclassification001mb } from "./Subcatclassification001mb";
 import { Subcategory001mb } from "./Subcategory001mb";
 import { Subscribercontentauth001wb } from "./Subscribercontentauth001wb";
+import { Subscriberdetails001wb } from "./subscriberdetails001wb";
 import { subscriberpersonalinfo001wb } from "./Subscriberpersonalinfo001wb";
 import { Subscriberprofessionalinfo002wb } from "./Subscriberprofessionalinfo002wb";
 import { User001wb } from "./users001wb";
 
 export class Person001mb extends BaseEntity {
-    usersid?:User001wb|any;
+    userid?:User001wb|any;
     loginid?:Login001mb|any;
+    subscriberdetailsid?:Subscriberdetails001wb|any;
     regionalid?: Regionaldetails001mb;
     companycode?: Companydetails001mb;
     roleid?: Role001wb;

@@ -17,7 +17,7 @@ export class AuthManager extends BaseService {
         params['password'] = pWord;
         // params['domain'] = domain;
         console.log("params",params);
-        return this.getCallService(`${this.authManagerUrl}`+`/list1`, params)
+        return this.getCallService(`${this.authManagerUrl}`+`/lister`, params)
             .pipe(map(res => {
                 if (res) {
                     sessionStorage.setItem('currentUser', JSON.stringify(res));

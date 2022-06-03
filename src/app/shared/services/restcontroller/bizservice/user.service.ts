@@ -43,7 +43,7 @@ export class UserManager extends BaseService {
   }
 
   updateUserTheme(updateTheme: any) {
-    console.log("updatetheme",updateTheme)
+  
     return this.putCallService(`${this.userUrl}` + "/updatetheme", {}, updateTheme);
   }
 

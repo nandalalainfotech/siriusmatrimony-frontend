@@ -39,11 +39,12 @@
                 </div>
                 <div class="col-xs-6 col-sm-6 ">
                     <div class="form-group">
+                       
                         <label path="password" for="password" cssClass="required">Password</label>
-                        <input formControlName="password" class="form-control" [disabled]="isDisabled" 
+                        <input formControlName="password" class="form-control" 
                             [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                            <div *ngIf="f.password.errors.required">Password is required</div>
+                            <div *ngIf="f.password.errors.required" >Password is required</div>
                         </div>
                     </div>
                 </div>
