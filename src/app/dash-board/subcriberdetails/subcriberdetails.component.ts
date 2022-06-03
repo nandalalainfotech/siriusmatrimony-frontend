@@ -257,10 +257,10 @@ export class SubcriberdetailsComponent implements OnInit {
   onDeleteButtonClick(params: any) {
     this.subscriberdetailsManager.deletesub(params.data.subdid).subscribe((response) => {
       for (let i = 0; i < this.subscriptionmaster.length; i++) {
-        if (this.subscriptionmaster[i].subdid == params.data.subdid) {
-          this.subscriptionmaster?.splice(i, 1);
-          break;
-        }
+        // if (this.subscriptionmaster[i].subdid == params.data.subdid) {
+        //   this.subscriptionmaster?.splice(i, 1);
+        //   break;
+        // }
       }
       const selectedRows = params.api.getSelectedRows();
       params.api.applyTransaction({ remove: selectedRows });
@@ -304,7 +304,7 @@ export class SubcriberdetailsComponent implements OnInit {
     subscriberdetails001wb.subscapproval = this.f.subscapproval.value ? this.f.subscapproval.value : "";
     subscriberdetails001wb.personid = this.f.personid.value ? this.f.personid.value : "";
     if (this.subdid) {
-      subscriberdetails001wb.subdid = this.subdid;
+      // subscriberdetails001wb.subdid = this.subdid;
       subscriberdetails001wb.insertUser = this.insertUser;
       subscriberdetails001wb.insertDatetime = this.insertDatetime;
       subscriberdetails001wb.updatedUser = this.authManager.getcurrentUser.username;
@@ -313,20 +313,20 @@ export class SubcriberdetailsComponent implements OnInit {
         this.calloutService.showSuccess("Order Update Successfully");
         let submaster = deserialize<Subscriberdetails001wb>(Subscriberdetails001wb, response);
         for (let analytic of this.subscriptionmaster) {
-          if (analytic.subdid == submaster.subdid) {
-            analytic.personid = submaster.personid;
-            analytic.approvedby = submaster.approvedby;
-            analytic.approvedon = submaster.approvedon;
-            analytic.horoscope = submaster.horoscope;
-            analytic.payid = submaster.payid;
-            analytic.subpid = submaster.subpid;
-            analytic.subscdesc = submaster.subscdesc;
-            analytic.subscapproval = submaster.subscapproval;
-            analytic.insertUser = this.insertUser;
-            analytic.insertDatetime = this.insertDatetime;
-            analytic.updatedUser = this.authManager.getcurrentUser.username;
-            analytic.updatedDatetime = new Date();
-          }
+          // if (analytic.subdid == submaster.subdid) {
+          //   analytic.personid = submaster.personid;
+          //   analytic.approvedby = submaster.approvedby;
+          //   analytic.approvedon = submaster.approvedon;
+          //   analytic.horoscope = submaster.horoscope;
+          //   analytic.payid = submaster.payid;
+          //   analytic.subpid = submaster.subpid;
+          //   analytic.subscdesc = submaster.subscdesc;
+          //   analytic.subscapproval = submaster.subscapproval;
+          //   analytic.insertUser = this.insertUser;
+          //   analytic.insertDatetime = this.insertDatetime;
+          //   analytic.updatedUser = this.authManager.getcurrentUser.username;
+          //   analytic.updatedDatetime = new Date();
+          // }
         }
         this.gridOptions.api.setRowData(this.subscriptionmaster);
         this.gridOptions.api.refreshView();

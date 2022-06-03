@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GridOptions, ValueGetterParams } from 'ag-grid-community';
@@ -38,9 +38,9 @@ import { CalloutService } from 'src/app/shared/services/services/callout.service
 export class RegistrationComponent implements OnInit {
 
     frameworkComponents: any;
-    personid: string = "";
-    loginid: string = "";
-    userid: string = "";
+    personid: any;
+    loginid: any;
+    userid: any;
     insertUser: string = "";
     insertDatetime: Date | any;
     regionalid: string = "";
@@ -70,7 +70,6 @@ export class RegistrationComponent implements OnInit {
     address: string = "";
     phoneno?: number;
     verified?: boolean;
-    domain: string = "";
     username: string = "";
     password: string = "";
     employeeid: String = "";
@@ -103,8 +102,8 @@ export class RegistrationComponent implements OnInit {
     countrys: any[] = [];
     citys: any[] = [];
     login: any;
-    isDisabled: boolean=false;
-    firstNameIsReadOnly: boolean=false;
+
+
     constructor(
         private regionalManager: RegionalManager,
         private companyManager: CompanyManager,
@@ -148,7 +147,7 @@ export class RegistrationComponent implements OnInit {
             sex: ['', Validators.required],
             address: ['', Validators.required],
             // verified:['',Validators.required],
-            password: [{ value: null, isDisabled: true}, Validators.required],
+            password: ["", Validators.required],
             regionalid: ['', Validators.required],
             roleid: ['', Validators.required],
             subcatcode: ['', Validators.required],
@@ -168,8 +167,6 @@ export class RegistrationComponent implements OnInit {
             accountnumber: ['', Validators.required],
             insurance: ['', Validators.required],
             accounttype: ['', Validators.required]
-            // theme:['',Validators.required],
-
 
         });
         this.regionalManager.allregional().subscribe((response) => {
@@ -218,9 +215,9 @@ export class RegistrationComponent implements OnInit {
         this.createDataGrid001();
 
     }
-
     loaddata() {
         this.personManager.allperson().subscribe((response) => {
+
             if (response.person001mb.length > 0) {
                 this.gridOptions?.api?.setRowData(response.person001mb);
             } else {
@@ -591,6 +588,83 @@ export class RegistrationComponent implements OnInit {
                 hide: "true"
             },
             {
+                headerName: 'payid',
+                field: 'payid',
+                width: 200,
+                sortable: true,
+                filter: true,
+                resizable: true,
+                suppressSizeToFit: true,
+                valueGetter: this.payidValueGetter,
+                hide: "true"
+            },
+            {
+                headerName: 'contentid',
+                field: 'contentid',
+                width: 200,
+                sortable: true,
+                filter: true,
+                resizable: true,
+                suppressSizeToFit: true,
+                valueGetter: this.contentidValueGetter,
+                hide: "true"
+            },
+            {
+                headerName: 'horoscope',
+                field: 'horoscope',
+                width: 200,
+                sortable: true,
+                filter: true,
+                resizable: true,
+                suppressSizeToFit: true,
+                valueGetter: this.horoscopeValueGetter,
+                hide: "true"
+            },
+            {
+                headerName: 'subscdesc',
+                field: 'subscdesc',
+                width: 200,
+                sortable: true,
+                filter: true,
+                resizable: true,
+                suppressSizeToFit: true,
+                valueGetter: this.subscdescValueGetter,
+                hide: "true"
+            },
+            {
+                headerName: 'approvedby',
+                field: 'approvedby',
+                width: 200,
+                sortable: true,
+                filter: true,
+                resizable: true,
+                suppressSizeToFit: true,
+                valueGetter: this.approvedbyValueGetter,
+                hide: "true"
+            },
+            {
+                headerName: 'approvedon',
+                field: 'approvedon',
+                width: 200,
+                sortable: true,
+                filter: true,
+                resizable: true,
+                suppressSizeToFit: true,
+                valueGetter: this.approvedonValueGetter,
+                hide: "true"
+            },
+            {
+                headerName: 'subscapproval',
+                field: 'subscapproval',
+                width: 200,
+                sortable: true,
+                filter: true,
+                resizable: true,
+                suppressSizeToFit: true,
+                valueGetter: this.subscapprovalValueGetter,
+                hide: "true"
+            },
+            {
                 headerName: 'Edit',
                 cellRenderer: 'iconRenderer',
                 width: 200,
@@ -623,28 +697,50 @@ export class RegistrationComponent implements OnInit {
                     label: 'Audit'
                 },
             },
+            
         ];
     }
     passwordValueGetter(params: ValueGetterParams) {
-        return params.data.loginid.password;
-    }
-    accounttypeValueGetter(params: ValueGetterParams) {
-        return params.data.usersid.accounttype;
-    }
-    insuranceValueGetter(params: ValueGetterParams) {
-        return params.data.usersid.insurance;
-    }
-    accountnumberValueGetter(params: ValueGetterParams) {
-        return params.data.usersid.accountnumber;
-    }
-    banknameValueGetter(params: ValueGetterParams) {
-        return params.data.usersid.bankname;
-    }
-    employeeidValueGetter(params: ValueGetterParams) {
-        return params.data.usersid.employeeid;
+        return params.data.loginid ? params.data.loginid.password : null;
     }
     usernameValueGetter(params: ValueGetterParams) {
-        return params.data.loginid.username;
+        return params.data.loginid ? params.data.loginid.username : null;
+    }
+    accounttypeValueGetter(params: ValueGetterParams) {
+        return params.data.usersid ? params.data.usersid.accounttype : null;
+    }
+    insuranceValueGetter(params: ValueGetterParams) {
+        return params.data.usersid ? params.data.usersid.insurance : null;
+    }
+    accountnumberValueGetter(params: ValueGetterParams) {
+        return params.data.usersid ? params.data.usersid.accountnumber : null;
+    }
+    banknameValueGetter(params: ValueGetterParams) {
+        return params.data.usersid ? params.data.usersid.bankname : null;
+    }
+    employeeidValueGetter(params: ValueGetterParams) {
+        return params.data.usersid ? params.data.usersid.employeeid : null;
+    }
+    payidValueGetter(params: ValueGetterParams) {
+        return params.data.loginid ? params.data.loginid.username : null;
+    }
+    contentidValueGetter(params: ValueGetterParams) {
+        return params.data.subscriberdetailsid ? params.data.subscriberdetailsid.contentid : null;
+    }
+    horoscopeValueGetter(params: ValueGetterParams) {
+        return params.data.subscriberdetailsid ? params.data.subscriberdetailsid.horoscope : null;
+    }
+    subscdescValueGetter(params: ValueGetterParams) {
+        return params.data.subscriberdetailsid ? params.data.subscriberdetailsid.subscdesc : null;
+    }
+    subscapprovalValueGetter(params: ValueGetterParams) {
+        return params.data.subscriberdetailsid ? params.data.subscriberdetailsid.subscapproval : null;
+    }
+    approvedbyValueGetter(params: ValueGetterParams) {
+        return params.data.subscriberdetailsid ? params.data.subscriberdetailsid.approvedby : null;
+    }
+    approvedonValueGetter(params: ValueGetterParams) {
+        return params.data.subscriberdetailsid ? params.data.subscriberdetailsid.approvedon : null;
     }
     onEditButtonClick(params: any) {
         this.personid = params.data._id;
@@ -652,76 +748,73 @@ export class RegistrationComponent implements OnInit {
         this.userid = params.data.usersid._id;
         this.insertUser = params.data.insertUser;
         this.insertDatetime = params.data.insertDatetime;
-        // if (params.data.password) {
-        //     this.registerForm.patchValue({
-        //         'password': params.data.password
-        //     })
-           
-        // }
-            this.registerForm.patchValue({
-                'id': params.data._id,
-                'usersid': params.data.usersid,
-                'loginid': params.data.loginid,
-                'username': params.data.loginid.username,
-                'firstname': params.data.firstname,
-                'lastname': params.data.lastname,
-                'zipcode': params.data.zipcode,
-                'dob': params.data.dob,
-                'email': params.data.email,
-                'confirmemail': params.data.confirmemail,
-                'landline': params.data.landline,
-                'age': params.data.age,
-                'sex': params.data.sex,
-                'address': params.data.address,
-                'phoneno': params.data.phoneno,
-                'regionalid': params.data.regionalid,
-                'companycode': params.data.companycode,
-                'roleid': params.data.roleid,
-                'subcatcode': params.data.subcatcode,
-                'professionalid': params.data.professionalid,
-                'categoryid': params.data.categoryid,
-                'languageid': params.data.languageid,
-                'personalid': params.data.personalid,
-                'religionid': params.data.religionid,
-                'classificationid': params.data.classificationid,
-                'subscsubspid': params.data.subscsubspid,
-                'stateid': params.data.stateid,
-                'cityid': params.data.cityid,
-                'countryid': params.data.countryid,
-                'employeeid': params.data.usersid.employeeid,
-                'bankname': params.data.usersid.bankname,
-                'accountnumber': params.data.usersid.accountnumber,
-                'insurance': params.data.usersid.insurance,
-                'accounttype': params.data.usersid.accounttype
-            });
-        }
+        this.registerForm.controls.password.disable()
 
-        onDeleteButtonClick(params: any) {
-            // this.userManager.deleteuser(params.data.personId).subscribe((response) => {
-            //     for (let i = 0; i < this.users.length; i++) {
-            //         if (this.users[i].personid == params.data.personid) {
-            //             this.users?.splice(i, 1);
-            //             break;
-            //         }
-            //     }
-            //     const selectedRows = params.api.getSelectedRows();
-            //     params.api.applyTransaction({ remove: selectedRows });
-            //     this.calloutService.showSuccess("Order Removed Successfully");
-            // });
-        }
+        this.registerForm.patchValue({
+            'id': params.data._id,
+            'password': '******',
+            'usersid': params.data.usersid,
+            'loginid': params.data.loginid,
+            'username': params.data.loginid.username,
+            'firstname': params.data.firstname,
+            'lastname': params.data.lastname,
+            'zipcode': params.data.zipcode,
+            'dob': params.data.dob,
+            'email': params.data.email,
+            'confirmemail': params.data.confirmemail,
+            'landline': params.data.landline,
+            'age': params.data.age,
+            'sex': params.data.sex,
+            'address': params.data.address,
+            'phoneno': params.data.phoneno,
+            'regionalid': params.data.regionalid,
+            'companycode': params.data.companycode,
+            'roleid': params.data.roleid,
+            'subcatcode': params.data.subcatcode,
+            'professionalid': params.data.professionalid,
+            'categoryid': params.data.categoryid,
+            'languageid': params.data.languageid,
+            'personalid': params.data.personalid,
+            'religionid': params.data.religionid,
+            'classificationid': params.data.classificationid,
+            'subscsubspid': params.data.subscsubspid,
+            'stateid': params.data.stateid,
+            'cityid': params.data.cityid,
+            'countryid': params.data.countryid,
+            'employeeid': params.data.usersid.employeeid,
+            'bankname': params.data.usersid.bankname,
+            'accountnumber': params.data.usersid.accountnumber,
+            'insurance': params.data.usersid.insurance,
+            'accounttype': params.data.usersid.accounttype,
+
+        });
+    }
 
 
-        onAuditButtonClick(params: any) {
-            const modalRef = this.modalService.open(AuditComponent);
-            modalRef.componentInstance.title = "Registration";
-            modalRef.componentInstance.details = params.data;
-        }
+    onDeleteButtonClick(params: any) {
+        // this.userManager.deleteuser(params.data.personId).subscribe((response) => {
+        //     for (let i = 0; i < this.users.length; i++) {
+        //         if (this.users[i].personid == params.data.personid) {
+        //             this.users?.splice(i, 1);
+        //             break;
+        //         }
+        //     }
+        //     const selectedRows = params.api.getSelectedRows();
+        //     params.api.applyTransaction({ remove: selectedRows });
+        //     this.calloutService.showSuccess("Order Removed Successfully");
+        // });
+    }
 
-        onFirstDataRendered(params: any) {
-            params.api.sizeColumnsToFit();
-            // this.gridOptions.api.node.setSelected(true);
-            // console.log(" this.gridOptions.api.node", this.gridOptions.api.node)
-        }
+
+    onAuditButtonClick(params: any) {
+        const modalRef = this.modalService.open(AuditComponent);
+        modalRef.componentInstance.title = "Registration";
+        modalRef.componentInstance.details = params.data;
+    }
+
+    onFirstDataRendered(params: any) {
+        params.api.sizeColumnsToFit();
+    }
 
     private markFormGroupTouched(formGroup: FormGroup) {
         (<any>Object).values(formGroup.controls).forEach((control: any) => {
@@ -743,9 +836,9 @@ export class RegistrationComponent implements OnInit {
         person001mb.firstname = this.f.firstname.value ? this.f.firstname.value : "";
         person001mb.lastname = this.f.lastname.value ? this.f.lastname.value : "";
         person001mb.companycode = this.f.companycode.value ? this.f.companycode.value : "";
-        //  person001mb.status = this.f.status.value ? this.f.status.value : "";
-        person001mb.regionalid = this.f.regionalid.value ? this.f.regionalid.value : "";
-        person001mb.usersid = null;
+        // person001mb.status = this.f.status.value ? this.f.status.value : "";
+        person001mb.verified = false;
+        person001mb.userid = null;
         person001mb.loginid = null;
         person001mb.regionalid = this.f.regionalid.value ? this.f.regionalid.value : "";
         person001mb.roleid = this.f.roleid.value ? this.f.roleid.value : "";
@@ -769,28 +862,41 @@ export class RegistrationComponent implements OnInit {
         person001mb.age = this.f.age.value ? this.f.age.value : "";
         person001mb.sex = this.f.sex.value ? this.f.sex.value : "";
         person001mb.email = this.f.email.value ? this.f.email.value : "";
+        // person001mb.insertUser = this.authManager.getcurrentUser.username;
+        person001mb.insertDatetime = new Date();
+        // person001mb.updatedUser = this.authManager.getcurrentUser.username;
+        // person001mb.updatedDatetime = new Date();
         console.log("person001mb", person001mb)
         let login001mb = new Login001mb();
         login001mb.username = this.f.username.value ? this.f.username.value : "";
         login001mb.password = this.f.password.value ? this.f.password.value : "";
         login001mb.roleid = person001mb.roleid;
+        login001mb.insertUser = login001mb.username;
+        login001mb.insertDatetime = person001mb.insertDatetime;
+        person001mb.insertUser = login001mb.username;
+        // login001mb.updatedUser = person001mb.updatedUser;
+        // login001mb.updatedDatetime = person001mb.updatedDatetime;
+
         let user001wb = new User001wb();
         user001wb.employeeid = this.f.employeeid.value ? this.f.employeeid.value : "";
         user001wb.bankname = this.f.bankname.value ? this.f.bankname.value : "";
         user001wb.accountnumber = this.f.accountnumber.value ? this.f.accountnumber.value : "";
         user001wb.insurance = this.f.insurance.value ? this.f.insurance.value : "";
         user001wb.accounttype = this.f.accounttype.value ? this.f.accounttype.value : "";
-
+        user001wb.insertUser = login001mb.username;
+        user001wb.insertDatetime = new Date();
         if (this.personid && this.loginid && this.userid) {
             // user001wb.personid = this.personid;
-            person001mb.insertUser = this.insertUser;
-            person001mb.insertDatetime = this.insertDatetime;
-            person001mb.updatedUser = this.authManager.getcurrentUser.username;
-            person001mb.updatedDatetime = new Date();
-            this.registerManager.updateuser(user001wb, login001mb, person001mb,).subscribe((response) => {
+            // person001mb.insertUser = login001mb.username;
+            // person001mb.insertDatetime = new Date();
+            // person001mb.updatedUser = this.authManager.getcurrentUser.username;
+            // person001mb.updatedDatetime = new Date();
+            console.log("this.personid && this.loginid && this.userid", this.personid, this.loginid, this.userid)
+            this.registerManager.updateuser(user001wb, person001mb, login001mb, this.personid, this.loginid, this.userid).subscribe((response) => {
+                console.log("response999999999999", response)
                 this.calloutService.showSuccess("Order Updated Successfully");
-                let person001mb = deserialize<Person001mb>(Person001mb, response);
-                console.log("person001mb", person001mb)
+                // let person001mb = deserialize<Person001mb>(Person001mb, response);
+                // console.log("response", response)
                 // for (let temp of this.persons) {
                 //     if (temp._id == person001mb._id) {
                 //         temp.appraisalTemp = apprtemp001mb.appraisalTemp;
@@ -802,15 +908,16 @@ export class RegistrationComponent implements OnInit {
                 //     }
                 // }
 
-                this.loaddata();
-                this.registerForm.reset();
-                this.submitted = false;
-                this.gridOptions.api.setRowData(this.persons);
-                this.gridOptions.api.refreshView();
-                this.gridOptions.api.deselectAll();
+                // this.loaddata();
+                // this.registerForm.reset();
+                // this.submitted = false;
+                // this.gridOptions.api.setRowData(this.persons);
+                // this.gridOptions.api.refreshView();
+                // this.gridOptions.api.deselectAll();
                 // this.personid = null;
             })
         }
+
         else {
             person001mb.insertUser = this.authManager.getcurrentUser.username;
             person001mb.insertDatetime = new Date();
@@ -831,5 +938,6 @@ export class RegistrationComponent implements OnInit {
     onReset() {
         this.registerForm.reset();
         this.submitted = false;
+        this.registerForm.controls.password.enable()
     }
 }
