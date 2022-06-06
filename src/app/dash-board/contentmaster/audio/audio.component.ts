@@ -262,10 +262,10 @@ export class AudioComponent implements OnInit {
     audio001wb.originalname = this.f.originalname.value ? this.f.originalname.value : "";
     if (this.audioid) {
       audio001wb.audioid = this.audioid;
-      audio001wb.insertUser = this.insertUser;
-      audio001wb.insertDatetime = this.insertDatetime;
-      audio001wb.updatedUser = this.authManager.getcurrentUser.username;
-      audio001wb.updatedDatetime = new Date();
+      audio001wb.inserteduser = this.insertUser;
+      audio001wb.inserteddatetime = this.insertDatetime;
+      audio001wb.updateduser = this.authManager.getcurrentUser.username;
+      audio001wb.updateddatetime = new Date();
       this.audioManager.updatesub(audio001wb,this.audioid).subscribe(response => {
         this.calloutService.showSuccess("Order Update Successfully");
         let audio = deserialize<Audio001wb>(Audio001wb, response);
@@ -276,10 +276,10 @@ export class AudioComponent implements OnInit {
             analytic.fieldname = audio.fieldname;
             analytic.originalname =audio.originalname
             analytic.filename = audio.filename;
-            analytic.insertUser = this.insertUser;
-            analytic.insertDatetime = this.insertDatetime;
-            analytic.updatedUser = this.authManager.getcurrentUser.username;
-            analytic.updatedDatetime = new Date();
+            analytic.inserteduser = this.insertUser;
+            analytic.inserteddatetime = this.insertDatetime;
+            analytic.updateduser = this.authManager.getcurrentUser.username;
+            analytic.updateddatetime = new Date();
           }
         }
         this.gridOptions.api.setRowData(this.audio);

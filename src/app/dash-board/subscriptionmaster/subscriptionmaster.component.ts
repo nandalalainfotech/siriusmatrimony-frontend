@@ -264,10 +264,10 @@ export class SubscriptionmasterComponent implements OnInit {
     subscriptionmaster001mb.personid = this.f.personid.value ? this.f.personid.value : "";
     if (this.subpid) {
       subscriptionmaster001mb.subpid = this.subpid;
-      subscriptionmaster001mb.insertUser = this.insertUser;
-      subscriptionmaster001mb.insertDatetime = this.insertDatetime;
-      subscriptionmaster001mb.updatedUser = this.authManager.getcurrentUser.username;
-      subscriptionmaster001mb.updatedDatetime = new Date();
+      subscriptionmaster001mb.inserteduser = this.insertUser;
+      subscriptionmaster001mb.inserteddatetime = this.insertDatetime;
+      subscriptionmaster001mb.updateduser = this.authManager.getcurrentUser.username;
+      subscriptionmaster001mb.updateddatetime = new Date();
       this.subscriptionmasterManager.updatesub(subscriptionmaster001mb).subscribe(response => {
         this.calloutService.showSuccess("Order Update Successfully");
         let submaster = deserialize<Subscriptionmaster001mb>(Subscriptionmaster001mb, response);
@@ -279,10 +279,10 @@ export class SubscriptionmasterComponent implements OnInit {
             analytic.personid =submaster.personid;
             analytic.tenure =submaster.tenure;
             analytic.subpname =submaster.subpname;
-            analytic.insertUser = this.insertUser;
-            analytic.insertDatetime = this.insertDatetime;
-            analytic.updatedUser = this.authManager.getcurrentUser.username;
-            analytic.updatedDatetime = new Date();
+            analytic.inserteduser = this.insertUser;
+            analytic.inserteddatetime = this.insertDatetime;
+            analytic.updateduser = this.authManager.getcurrentUser.username;
+            analytic.updateddatetime = new Date();
           }
         }
         this.gridOptions.api.setRowData(this.subscriptionmaster);

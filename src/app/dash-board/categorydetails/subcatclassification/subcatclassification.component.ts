@@ -231,10 +231,10 @@ export class SubcatclassificationComponent implements OnInit {
     subcatclassification.classificationname = this.f.classificationname.value ? this.f.classificationname.value : "";
     if (this.subcatclasiid) {
       subcatclassification.subcatclasiid = this.subcatclasiid;
-      subcatclassification.insertUser = this.insertUser;
-      subcatclassification.insertDatetime = this.insertDatetime;
-      subcatclassification.updatedUser = this.authManager.getcurrentUser.username;
-      subcatclassification.updatedDatetime = new Date();
+      subcatclassification.inserteduser = this.insertUser;
+      subcatclassification.inserteddatetime = this.insertDatetime;
+      subcatclassification.updateduser = this.authManager.getcurrentUser.username;
+      subcatclassification.updateddatetime = new Date();
       this.subcatclassificationManager.updatesubclasi(subcatclassification).subscribe(response => {
         this.calloutService.showSuccess("Order Update Successfully");
         let subcat = deserialize<Subcatclassification001mb>(Subcatclassification001mb, response);
@@ -243,10 +243,10 @@ export class SubcatclassificationComponent implements OnInit {
             analytic.catcode = subcat.catcode;
             analytic.subcatcode = subcat.subcatcode;
             analytic.classificationname = subcat.classificationname;
-            analytic.insertUser = this.insertUser;
-            analytic.insertDatetime = this.insertDatetime;
-            analytic.updatedUser = this.authManager.getcurrentUser.username;
-            analytic.updatedDatetime = new Date();
+            analytic.inserteduser = this.insertUser;
+            analytic.inserteddatetime = this.insertDatetime;
+            analytic.updateduser = this.authManager.getcurrentUser.username;
+            analytic.updateddatetime = new Date();
           }
         }
         this.gridOptions.api.setRowData(this.subCatClassification);

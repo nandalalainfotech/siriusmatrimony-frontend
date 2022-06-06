@@ -254,10 +254,10 @@ export class VideoComponent implements OnInit {
     video001wb.originalname = this.f.originalname.value ? this.f.originalname.value : "";
     if (this.videoid) {
       video001wb.videoid = this.videoid;
-      video001wb.insertUser = this.insertUser;
-      video001wb.insertDatetime = this.insertDatetime;
-      video001wb.updatedUser = this.authManager.getcurrentUser.username;
-      video001wb.updatedDatetime = new Date();
+      // video001wb.insertUser = this.insertUser;
+      // video001wb.insertDatetime = this.insertDatetime;
+      // video001wb.updatedUser = this.authManager.getcurrentUser.username;
+      // video001wb.updatedDatetime = new Date();
       // this.videoManager.updatesub(video001wb).subscribe(response => {
       //   this.calloutService.showSuccess("Order Update Successfully");
       //   let photos = deserialize<Video001wb>(Video001wb, response);

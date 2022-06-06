@@ -39,4 +39,12 @@ export class RegisterManager extends BaseService {
     return this.putCallService(`${this.userUrl}` + "/update" , {},data);
   }
 
+  deleteuser(personid:any,loginid:any,userid:any) {
+    let data: any = {};
+    data['personid'] = personid;
+    data['loginid'] = loginid;
+    data['userid'] = userid;
+    console.log("deletr",data)
+    return this.deleteCallService(`${this.userUrl}` + "/delete", data);
+  }
 }
