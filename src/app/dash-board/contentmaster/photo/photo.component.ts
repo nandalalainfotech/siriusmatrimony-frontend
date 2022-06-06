@@ -324,10 +324,10 @@ export class PhotoComponent implements OnInit {
     photo001wb.originalname = this.f.originalname.value ? this.f.originalname.value : "";
     if (this.photoid) {
       photo001wb.photoid = this.photoid;
-      photo001wb.insertUser = this.insertUser;
-      photo001wb.insertDatetime = this.insertDatetime;
-      photo001wb.updatedUser = this.authManager.getcurrentUser.username;
-      photo001wb.updatedDatetime = new Date();
+      // photo001wb.insertUser = this.insertUser;
+      // photo001wb.insertDatetime = this.insertDatetime;
+      // photo001wb.updatedUser = this.authManager.getcurrentUser.username;
+      // photo001wb.updatedDatetime = new Date();
       // this.photoManager.updatesub(photo001wb).subscribe(response => {
       //   this.calloutService.showSuccess("Order Update Successfully");
       //   let photos = deserialize<Photo001wb>(Photo001wb, response);

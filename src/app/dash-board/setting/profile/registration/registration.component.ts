@@ -41,8 +41,8 @@ export class RegistrationComponent implements OnInit {
     personid: any;
     loginid: any;
     userid: any;
-    insertUser: string = "";
-    insertDatetime: Date | any;
+    inserteduser: string = "";
+    inserteddatetime: Date | any;
     regionalid: string = "";
     companycode?: string = "";
     roleid?: string = "";
@@ -166,7 +166,14 @@ export class RegistrationComponent implements OnInit {
             bankname: ['', Validators.required],
             accountnumber: ['', Validators.required],
             insurance: ['', Validators.required],
-            accounttype: ['', Validators.required]
+            accounttype: ['', Validators.required],
+            // payid: [],
+            // contentid: [],
+            // horoscope: [],
+            // subscdesc: [],
+            // approvedby: [],
+            // approvedon: [],
+            // subscapproval: []
 
         });
         this.regionalManager.allregional().subscribe((response) => {
@@ -697,7 +704,7 @@ export class RegistrationComponent implements OnInit {
                     label: 'Audit'
                 },
             },
-            
+
         ];
     }
     passwordValueGetter(params: ValueGetterParams) {
@@ -743,13 +750,13 @@ export class RegistrationComponent implements OnInit {
         return params.data.subscriberdetailsid ? params.data.subscriberdetailsid.approvedon : null;
     }
     onEditButtonClick(params: any) {
+        console.log("params-edit", params)
         this.personid = params.data._id;
         this.loginid = params.data.loginid._id;
         this.userid = params.data.usersid._id;
-        this.insertUser = params.data.insertUser;
-        this.insertDatetime = params.data.insertDatetime;
+        this.inserteduser = params.data.inserteduser;
+        this.inserteddatetime = params.data.inserteddatetime;
         this.registerForm.controls.password.disable()
-
         this.registerForm.patchValue({
             'id': params.data._id,
             'password': '******',
@@ -792,17 +799,14 @@ export class RegistrationComponent implements OnInit {
 
 
     onDeleteButtonClick(params: any) {
-        // this.userManager.deleteuser(params.data.personId).subscribe((response) => {
-        //     for (let i = 0; i < this.users.length; i++) {
-        //         if (this.users[i].personid == params.data.personid) {
-        //             this.users?.splice(i, 1);
-        //             break;
-        //         }
-        //     }
-        //     const selectedRows = params.api.getSelectedRows();
-        //     params.api.applyTransaction({ remove: selectedRows });
-        //     this.calloutService.showSuccess("Order Removed Successfully");
-        // });
+        this.personid = params.data._id;
+        this.loginid = params.data.loginid._id;
+        this.userid = params.data.usersid._id;
+        this.registerManager.deleteuser(this.personid, this.loginid, this.userid).subscribe((response) => {
+            const selectedRows = params.api.getSelectedRows();
+            params.api.applyTransaction({ remove: selectedRows });
+            this.calloutService.showSuccess("Order Removed Successfully");
+        });
     }
 
 
@@ -810,6 +814,7 @@ export class RegistrationComponent implements OnInit {
         const modalRef = this.modalService.open(AuditComponent);
         modalRef.componentInstance.title = "Registration";
         modalRef.componentInstance.details = params.data;
+        
     }
 
     onFirstDataRendered(params: any) {
@@ -862,20 +867,19 @@ export class RegistrationComponent implements OnInit {
         person001mb.age = this.f.age.value ? this.f.age.value : "";
         person001mb.sex = this.f.sex.value ? this.f.sex.value : "";
         person001mb.email = this.f.email.value ? this.f.email.value : "";
-        // person001mb.insertUser = this.authManager.getcurrentUser.username;
-        person001mb.insertDatetime = new Date();
-        // person001mb.updatedUser = this.authManager.getcurrentUser.username;
-        // person001mb.updatedDatetime = new Date();
+        person001mb.inserteddatetime = new Date();
+        person001mb.updateduser = "";
+        person001mb.inserteduser = this.authManager.getcurrentUser.username;
+        person001mb.updateddatetime = null;
         console.log("person001mb", person001mb)
         let login001mb = new Login001mb();
         login001mb.username = this.f.username.value ? this.f.username.value : "";
         login001mb.password = this.f.password.value ? this.f.password.value : "";
         login001mb.roleid = person001mb.roleid;
-        login001mb.insertUser = login001mb.username;
-        login001mb.insertDatetime = person001mb.insertDatetime;
-        person001mb.insertUser = login001mb.username;
-        // login001mb.updatedUser = person001mb.updatedUser;
-        // login001mb.updatedDatetime = person001mb.updatedDatetime;
+        login001mb.inserteduser = this.authManager.getcurrentUser.username;
+        login001mb.inserteddatetime = person001mb.inserteddatetime;
+        login001mb.updateduser = "";
+        login001mb.updateddatetime = null;
 
         let user001wb = new User001wb();
         user001wb.employeeid = this.f.employeeid.value ? this.f.employeeid.value : "";
@@ -883,45 +887,47 @@ export class RegistrationComponent implements OnInit {
         user001wb.accountnumber = this.f.accountnumber.value ? this.f.accountnumber.value : "";
         user001wb.insurance = this.f.insurance.value ? this.f.insurance.value : "";
         user001wb.accounttype = this.f.accounttype.value ? this.f.accounttype.value : "";
-        user001wb.insertUser = login001mb.username;
-        user001wb.insertDatetime = new Date();
+        user001wb.inserteduser = this.authManager.getcurrentUser.username;
+        user001wb.inserteddatetime = new Date();
+        user001wb.updateduser = "";
+        user001wb.updateddatetime = null;
         if (this.personid && this.loginid && this.userid) {
-            // user001wb.personid = this.personid;
-            // person001mb.insertUser = login001mb.username;
-            // person001mb.insertDatetime = new Date();
-            // person001mb.updatedUser = this.authManager.getcurrentUser.username;
-            // person001mb.updatedDatetime = new Date();
+            user001wb.inserteduser = this.inserteduser;
+            user001wb.inserteddatetime = this.inserteddatetime;
+            login001mb.inserteduser = user001wb.inserteduser;
+            login001mb.inserteddatetime = user001wb.inserteddatetime;
+            person001mb.inserteduser = user001wb.inserteduser;
+            person001mb.inserteddatetime = user001wb.inserteddatetime;
+
+            person001mb.updateduser = this.authManager.getcurrentUser.username;
+            person001mb.updateddatetime = new Date();
+            login001mb.updateduser = person001mb.updateduser;
+            login001mb.updateddatetime = person001mb.updateddatetime;
+            user001wb.updateduser = person001mb.updateduser;
+            user001wb.updateddatetime = person001mb.updateddatetime;
             console.log("this.personid && this.loginid && this.userid", this.personid, this.loginid, this.userid)
             this.registerManager.updateuser(user001wb, person001mb, login001mb, this.personid, this.loginid, this.userid).subscribe((response) => {
                 console.log("response999999999999", response)
                 this.calloutService.showSuccess("Order Updated Successfully");
-                // let person001mb = deserialize<Person001mb>(Person001mb, response);
-                // console.log("response", response)
-                // for (let temp of this.persons) {
-                //     if (temp._id == person001mb._id) {
-                //         temp.appraisalTemp = apprtemp001mb.appraisalTemp;
-                //         temp.description = apprtemp001mb.description;
-                //         temp.insertUser = this.insertUser;
-                //         temp.insertDatetime = this.insertDatetime;
-                //         temp.updatedUser = this.authManager.getcurrentUser.username;
-                //         temp.updatedDatetime = new Date();
-                //     }
-                // }
 
-                // this.loaddata();
-                // this.registerForm.reset();
-                // this.submitted = false;
+                this.loaddata();
+                this.registerForm.reset();
+                this.submitted = false;
                 // this.gridOptions.api.setRowData(this.persons);
-                // this.gridOptions.api.refreshView();
-                // this.gridOptions.api.deselectAll();
-                // this.personid = null;
+                this.gridOptions.api.refreshView();
+                this.gridOptions.api.deselectAll();
+                this.personid = null;
+                this.loginid = null;
+                this.userid = null;
+                this.registerForm.controls.password.enable()
             })
         }
 
         else {
-            person001mb.insertUser = this.authManager.getcurrentUser.username;
-            person001mb.insertDatetime = new Date();
+            // person001mb.insertUser = this.authManager.getcurrentUser.username;
+            // person001mb.insertDatetime = new Date();
             this.registerManager.saveuser(user001wb, login001mb, person001mb,).subscribe((response) => {
+                console.log("response888888888888", response)
                 this.calloutService.showSuccess("Order Saved Successfully");
                 this.loaddata();
                 // let person001mb = deserialize<Person001mb>(Person001mb, response);
@@ -938,6 +944,6 @@ export class RegistrationComponent implements OnInit {
     onReset() {
         this.registerForm.reset();
         this.submitted = false;
-        this.registerForm.controls.password.enable()
+
     }
 }
