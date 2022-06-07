@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BodyDashboardComponent } from './body-dashboard/body-dashboard.component';
 
 import { DashBoardComponent } from './dash-board.component';
 
@@ -8,10 +9,10 @@ const routes: Routes = [
     path: "",
     component: DashBoardComponent,
     children: [
-      // {
-      //   path: "",
-      //   component: BodyComponent,
-      // },
+      {
+        path: "",
+        component: BodyDashboardComponent,
+      },
       // {
       //   path:'app-sidemenu-dashboard',
       //   loadChildren:() => import("./sidemenu-dashboard/sidemenu-dashboard.module").then(m => m.SidemenuDashboardModule)

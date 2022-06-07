@@ -11,29 +11,30 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AudiopopupComponent } from './shared/audiopopup/audiopopup.component';
 import { AuditComponent } from './shared/audit/audit.component';
+import { ImagepopupComponent } from './shared/imagepopup/imagepopup.component';
 import { PopupComponent } from './shared/popup/popup.component';
 import { CalloutComponent } from './shared/services/callout/callout.component';
 import { IconRendererComponent } from './shared/services/renderercomponent/icon-renderer-component';
+import { IconAudioRendererComponent } from './shared/services/renderercomponent/iconaudio-renderer-component';
+import { IconVideoRendererComponent } from './shared/services/renderercomponent/iconvideo-renderer-component';
 import { appSettingManager } from './shared/services/restcontroller/bizservice/app-settings.service';
+import { AudioManager } from './shared/services/restcontroller/bizservice/audio.service';
 import { AuthManager } from './shared/services/restcontroller/bizservice/auth-manager.service';
 import { PersonManager } from './shared/services/restcontroller/bizservice/person.service';
+import { PhotoManager } from './shared/services/restcontroller/bizservice/photo.service';
 import { UserManager } from './shared/services/restcontroller/bizservice/user.service';
+import { VideoManager } from './shared/services/restcontroller/bizservice/video.service';
 import { BaseService } from './shared/services/services/base.service';
 import { CalloutService } from './shared/services/services/callout.service';
 import { DataSharedService } from './shared/services/services/datashared.service';
+import { VideopopupComponent } from './shared/videopopup/videopopup.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { UserRegistrationModule } from './user-registration/user-registration.module';
 import { JwtInterceptor } from './_helpers';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
-import { ImagepopupComponent } from './shared/imagepopup/imagepopup.component';
-import { PhotoManager } from './shared/services/restcontroller/bizservice/photo.service';
-import { AudiopopupComponent } from './shared/audiopopup/audiopopup.component';
-import { VideopopupComponent } from './shared/videopopup/videopopup.component';
-import { IconAudioRendererComponent } from './shared/services/renderercomponent/iconaudio-renderer-component';
-import { AudioManager } from './shared/services/restcontroller/bizservice/audio.service';
-import { VideoManager } from './shared/services/restcontroller/bizservice/video.service';
-import { IconVideoRendererComponent } from './shared/services/renderercomponent/iconvideo-renderer-component';
+
 
 
 @NgModule({
@@ -50,7 +51,18 @@ import { IconVideoRendererComponent } from './shared/services/renderercomponent/
 		IconVideoRendererComponent,
 		ImagepopupComponent,
 		AudiopopupComponent,
-		VideopopupComponent
+		VideopopupComponent,
+
+
+		// 
+
+		// 
+		// 
+		// 
+		// PolarChartComponent,
+		// 
+
+
 	],
 	imports: [
 		CommonModule,
