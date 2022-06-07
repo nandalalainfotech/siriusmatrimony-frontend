@@ -47,8 +47,8 @@ export class PasswordComponent implements OnInit {
 		this.submitted = true;
 		if (!this.pwdForm.invalid) {
 			this.user001mb.password = this.f.password.value;
-			this.user001mb.insertUser = "insertUser";
-			this.user001mb.insertDatetime = new Date();
+			// this.user001mb.insertUser = "insertUser";
+			// this.user001mb.insertDatetime = new Date();
 			this.userManager.updatePassword(this.user001mb).subscribe((response: any) => {
 				if (response) {
 					this.calloutService.showSuccess("New Password Updated Successfully");

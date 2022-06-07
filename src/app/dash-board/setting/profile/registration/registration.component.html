@@ -471,6 +471,20 @@
                         <div *ngIf="submitted && f.accounttype.errors" class="invalid-feedback">
                             <div *ngIf="f.accounttype.errors.required">Accounttype is required</div>
                         </div>
+                        <input type="hidden" formControlName="payid" class="form-control" path="payid"
+                         />
+                        <input type="hidden" formControlName="contentid" class="form-control" path="contentid"
+                         />
+                        <input type="hidden" formControlName="horoscope" class="form-control" path="horoscope"
+                         />
+                        <input type="hidden" formControlName="subscdesc" class="form-control" path="subscdesc"
+                         />
+                        <input type="hidden" formControlName="approvedby" class="form-control" path="approvedby"
+                         />
+                         <input type="hidden" formControlName="approvedon" class="form-control" path="approvedon"
+                         />
+                         <input type="hidden" formControlName="subscapproval" class="form-control" path="subscapproval"
+                         />
                     </div>
                 </div>
             </div>

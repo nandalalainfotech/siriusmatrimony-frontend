@@ -305,10 +305,10 @@ export class SubcriberdetailsComponent implements OnInit {
     subscriberdetails001wb.personid = this.f.personid.value ? this.f.personid.value : "";
     if (this.subdid) {
       // subscriberdetails001wb.subdid = this.subdid;
-      subscriberdetails001wb.insertUser = this.insertUser;
-      subscriberdetails001wb.insertDatetime = this.insertDatetime;
-      subscriberdetails001wb.updatedUser = this.authManager.getcurrentUser.username;
-      subscriberdetails001wb.updatedDatetime = new Date();
+      // subscriberdetails001wb.insertUser = this.insertUser;
+      // subscriberdetails001wb.insertDatetime = this.insertDatetime;
+      // subscriberdetails001wb.updatedUser = this.authManager.getcurrentUser.username;
+      // subscriberdetails001wb.updatedDatetime = new Date();
       this.subscriberdetailsManager.updatesub(subscriberdetails001wb).subscribe(response => {
         this.calloutService.showSuccess("Order Update Successfully");
         let submaster = deserialize<Subscriberdetails001wb>(Subscriberdetails001wb, response);

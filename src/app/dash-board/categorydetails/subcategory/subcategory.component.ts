@@ -221,20 +221,20 @@ export class SubcategoryComponent implements OnInit {
     if (this.subcatid) {
       console.log("testting",this.subcatid)
       subcategory001mb.subcatid = this.subcatid;
-      subcategory001mb.insertUser = this.insertUser;
-      subcategory001mb.insertDatetime = this.insertDatetime;
-      subcategory001mb.updatedUser = this.authManager.getcurrentUser.username;
-      subcategory001mb.updatedDatetime = new Date();
+      subcategory001mb.inserteduser = this.insertUser;
+      subcategory001mb.inserteddatetime = this.insertDatetime;
+      subcategory001mb.updateduser = this.authManager.getcurrentUser.username;
+      subcategory001mb.updateddatetime = new Date();
       this.subCategoryManager.updatesub(subcategory001mb).subscribe(response => {
         this.calloutService.showSuccess("Order Update Successfully");
         let subcat = deserialize<Subcategory001mb>(Subcategory001mb, response);
         for (let analytic of this.subCategory) {
           if (analytic.subcatid == subcat.subcatid) {
             analytic.subcatname = subcat.subcatname;
-            analytic.insertUser = this.insertUser;
-            analytic.insertDatetime = this.insertDatetime;
-            analytic.updatedUser = this.authManager.getcurrentUser.username;
-            analytic.updatedDatetime = new Date();
+            analytic.inserteduser = this.insertUser;
+            analytic.inserteddatetime = this.insertDatetime;
+            analytic.updateduser = this.authManager.getcurrentUser.username;
+            analytic.updateddatetime = new Date();
           }
         }
         this.gridOptions.api.setRowData(this.subCategory);

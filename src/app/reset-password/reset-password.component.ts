@@ -27,8 +27,8 @@ export class ResetPasswordComponent implements OnInit {
 		if (this.password && this.confirmPassword) {
 			if (this.password == this.confirmPassword) {
 				this.user001mb.password = this.password;
-				this.user001mb.insertUser = "insertUser";
-				this.user001mb.insertDatetime = new Date();
+				this.user001mb.inserteduser = "insertUser";
+				this.user001mb.inserteddatetime = new Date();
 				// this.userManager.updatePassword(this.user001mb).subscribe((response: any) => {
 				// 	if (response.personId) {
 				// 		this.calloutService.showSuccess("Order Updated Successfully");

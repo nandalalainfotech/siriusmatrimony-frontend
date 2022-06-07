@@ -204,20 +204,20 @@ export class CategoryComponent implements OnInit {
     if (this.catid) {
       console.log("testting",this.catid)
       categorydetails.catid = this.catid;
-      categorydetails.insertUser = this.insertUser;
-      categorydetails.insertDatetime = this.insertDatetime;
-      categorydetails.updatedUser = this.authManager.getcurrentUser.username;
-      categorydetails.updatedDatetime = new Date();
+      categorydetails.inserteduser = this.insertUser;
+      categorydetails.inserteddatetime = this.insertDatetime;
+      categorydetails.updateduser = this.authManager.getcurrentUser.username;
+      categorydetails.updateddatetime = new Date();
       this.categoryManager.updatecatg(categorydetails).subscribe(response => {
         this.calloutService.showSuccess("Order Update Successfully");
         let subcat = deserialize<Categorydetails001mb>(Categorydetails001mb, response);
         for (let analytic of this.Categorydetails) {
           if (analytic.catid == subcat.catid) {
             analytic.catname = subcat.catname;
-            analytic.insertUser = this.insertUser;
-            analytic.insertDatetime = this.insertDatetime;
-            analytic.updatedUser = this.authManager.getcurrentUser.username;
-            analytic.updatedDatetime = new Date();
+            analytic.inserteduser = this.insertUser;
+            analytic.inserteddatetime = this.insertDatetime;
+            analytic.updateduser = this.authManager.getcurrentUser.username;
+            analytic.updateddatetime = new Date();
           }
         }
         this.gridOptions.api.setRowData(this.Categorydetails);

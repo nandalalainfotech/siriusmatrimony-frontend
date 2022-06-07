@@ -227,10 +227,10 @@ export class SettingsComponent implements OnInit {
         role001mb.status = this.f.status.value ? this.f.status.value : "";
         if (this.id) {
             // role001mb.id = this.id;
-            role001mb.insertUser = this.insertUser;
-            role001mb.insertDatetime = this.insertDatetime;
-            role001mb.updatedUser = this.authManager.getcurrentUser.username;
-            role001mb.updatedDatetime = new Date();
+            // role001mb.insertUser = this.insertUser;
+            // role001mb.insertDatetime = this.insertDatetime;
+            // role001mb.updatedUser = this.authManager.getcurrentUser.username;
+            // role001mb.updatedDatetime = new Date();
             this.roleManager.updaterole(role001mb).subscribe(response => {
                 this.calloutService.showSuccess("Order Updated Successfully");
                 this.loadData();
@@ -239,8 +239,8 @@ export class SettingsComponent implements OnInit {
             })
         }
         else {
-            role001mb.insertUser = this.authManager.getcurrentUser.username;
-            role001mb.insertDatetime = new Date();
+            // role001mb.insertUser = this.authManager.getcurrentUser.username;
+            // role001mb.insertDatetime = new Date();
             this.roleManager.saverole(role001mb).subscribe((response) => {
                 this.calloutService.showSuccess("Order Saved Successfully");
                 this.loadData();
