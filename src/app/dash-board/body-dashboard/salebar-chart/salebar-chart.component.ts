@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LegendPosition } from '@swimlane/ngx-charts';
 import { SubscriberdetailsManager } from 'src/app/shared/services/restcontroller/bizservice/subscriberdetails.service';
-import { multi } from './data';
+
 
 @Component({
     selector: 'app-salebar-chart',
@@ -44,7 +44,7 @@ export class SalebarChartComponent implements OnInit {
     // view: number[];
 
     constructor(private subscriberdetailsmanager: SubscriberdetailsManager) {
-        Object.assign(this, { multi })
+
 
         // this.view = [innerWidth / 1.9, 390];
         // this.view = [innerWidth / 1.89, 400];
