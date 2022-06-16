@@ -31,11 +31,9 @@ export class SalepieChartComponent implements OnInit {
   res: any;
   key: any;
   public legendPosition: LegendPosition = LegendPosition.Below;
-
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
+  colorScheme = {domain: ['#006778', '#24A19C']};
   httpClient: any;
+  domain: string[] | any;
 
   constructor(private personmanager: PersonManager) {
     // Object.assign(this, { single });
@@ -54,7 +52,7 @@ export class SalepieChartComponent implements OnInit {
           this.femalecount++;
         }
       }
-      this.single = [{ name: "Male", value: this.malecount}, { name: "Female", value: this.femalecount}];
+      this.single = [{ name: "Male", value: this.malecount }, { name: "Female", value: this.femalecount }];
       // console.log("muh", this.malecount,this.malecount)
       // Object.assign(this, { s });
 

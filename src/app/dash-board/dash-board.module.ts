@@ -64,6 +64,7 @@ import { HeaderComponent } from './header/header.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { SubscriberdetailsManager } from '../shared/services/restcontroller/bizservice/subscriberdetails.service';
 // import {NgxCumulioComponent} from 'ngx-cumulio';
 
 
@@ -176,7 +177,7 @@ NgxChartsModule,
         ColorPickerModule,
         DashboardRoutingModule
     ],
-    providers: [DataSharedService, UserManager,SubscriptionmasterManager],
+    providers: [DataSharedService, UserManager,SubscriptionmasterManager,SubscriberdetailsManager],
     exports: [NgbCollapseModule],
 })
 export class DashboardModule { }
