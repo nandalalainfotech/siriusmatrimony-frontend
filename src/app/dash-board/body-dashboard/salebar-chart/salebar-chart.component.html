@@ -15,12 +15,12 @@
          [yAxisLabel]="yAxisLabel"
          [animations]="animations" 
          [legendPosition]="legendPosition"
-            (select)="onSelect($event)"
-
-              style="margin-top: 35px;">
-        </ngx-charts-bar-vertical-stacked>
+         (select)="onSelect($event)"
+         [customColors]="customColors"
+         style="margin-top: 35px;"
+         [scheme]="colorScheme">
+        </ngx-charts-bar-vertical-stacked >
     </div>
 </div>
-
 
 <!-- [view]="[725, 260]"  -->

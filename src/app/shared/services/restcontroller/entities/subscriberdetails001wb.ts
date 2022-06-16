@@ -14,4 +14,5 @@ subscdesc?: string;
 subscapproval?: boolean;
 approvedby?: string;
 approvedon?: string;
+monthlyregistration?:Date
 }

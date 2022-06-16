@@ -5,7 +5,8 @@
 
   <ngx-charts-pie-chart [view]="[380, 283]" [results]="single" [legendTitle]="legendTitle" [gradient]="gradient"
     [legend]="showLegend" [legendPosition]="legendPosition" [labels]="showLabels" [doughnut]="isDoughnut"
-    (select)="onSelect($event)" (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+    (select)="onSelect($event)" (activate)="onActivate($event)" (deactivate)="onDeactivate($event)"
+    [scheme]="colorScheme">
   </ngx-charts-pie-chart>
 
 
